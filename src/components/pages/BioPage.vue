@@ -1,110 +1,121 @@
 <template>
   <section class="section-bio">
-    <h2 class="bio__title">About me</h2>
-    <div class="bio__img"></div>
-    <h3 class="bio__subtitle">Front End Web Developer</h3>
-    <p class="bio__text">
-      I'm 26 years old and since May of 2024 i have been studying web
-      development. <br />
-      Here you can find information about my journey and have a look at my most
-      recent projects and codebase. Check out the projects' section to see more!
-    </p>
-
-    <a class="bio__link">go to projects</a>
+    <h2 class="bio__title">About <span class="sub-text">me</span></h2>
+    <div class="bio__card">
+      <div alt="avatar-image" class="card__img">
+        <img
+          :src="require('/src/assets/img/circle.png')"
+          class="img__ring"
+          alt=""
+        />
+        <img :src="require('/src/assets/img/avatar.jpg')" class="img__avatar" />
+      </div>
+      <h3 class="card__label">Front End Web Developer</h3>
+    </div>
+    <div class="bio__desc">
+      <p class="bio__desc-subsection">
+        I'm 26 years old and since May of 2024 i have been studying web
+        development.
+      </p>
+      <p class="bio__desc-subsection">
+        Here you can find information about my journey and have a look at my
+        most recent projects and codebase. Check out the 'projects' section to
+        see more!
+      </p>
+    </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
-.section-bio {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@mixin vertical-flex {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+}
+.section-bio {
+  @include vertical-flex;
+  justify-content: center;
   align-items: center;
-  height: 100dvh;
-  padding: 1rem;
+  min-height: 100svh;
+  margin-top: 10svh;
   text-align: center;
+  transition: all 1s ease;
 
   .bio__title {
+    margin-top: 11svh;
     font-size: 5rem;
+
+    .sub-text {
+      color: var(--theme-primary);
+    }
   }
 
-  .bio__img {
-    position: relative;
-    width: 8rem;
-    height: 8rem;
+  .bio__card {
+    @include vertical-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0rem;
 
-    aspect-ratio: 1;
-    background: url(/src/assets/img/layers.png);
-    background-size: cover;
-    background-position: center;
-    border-radius: 100%;
-
-    &::before,
-    &::after {
-      position: absolute;
-      top: -6%;
-      left: -6%;
-      width: 8rem;
-      height: 8rem;
-      padding: 0.5rem;
-      background: rgb(255, 255, 255);
-
-      aspect-ratio: 1;
+    .card__img {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 3rem;
       border-radius: 100%;
-      border: none;
-      content: "";
-    }
-    &::after {
-      z-index: -2;
-    }
 
-    &::before {
-      padding: 1rem;
-      top: -12.5%;
-      left: -12.5%;
-      border: none;
+      .img__avatar {
+        position: absolute;
+        width: 18rem;
+        height: 18rem;
+        border-radius: 100%;
+        z-index: 10;
+        border: solid 3px var(--theme-primary);
+      }
 
-      z-index: -1;
-      transform: rotateZ(0deg);
-
-      background: linear-gradient(
-        to bottom,
-        rgb(255, 255, 255) 30%,
-        rgb(0, 183, 255) 31%,
-        rgb(89, 0, 255) 100%
-      );
-      background-size: 200% 200%;
-      animation: rotation 3s linear infinite forwards;
+      .img__ring {
+        width: 20rem;
+        height: 20rem;
+        filter: drop-shadow(0rem 0rem 0.6rem var(--theme-primary));
+        animation: rotation 5s linear infinite;
+      }
 
       @keyframes rotation {
         0% {
-          transform: rotateZ(0deg);
+          rotate: 0deg;
         }
         100% {
-          transform: rotateZ(360deg);
+          rotate: 360deg;
         }
       }
     }
-  }
-  .bio__subtitle {
-    font-size: 3rem;
+    .card__label {
+      font-size: 3rem;
+    }
   }
 
-  .bio__text {
-    display: -webkit-box;
-    padding: 0rem 2rem;
-    font-size: 2rem;
-    font-weight: 600;
+  .bio__desc {
     max-width: 85%;
-
-    line-clamp: 5;
-    text-align: center;
-    white-space: pre-wrap;
-  }
-
-  .bio__link {
+    padding: 1rem 2rem;
     font-size: 2rem;
     font-weight: 600;
+    line-clamp: 5;
+    white-space: break-spaces;
+    text-align: center;
+    border: solid 2px var(--theme-primary);
+    border-radius: 10px;
+
+    .bio__desc-subsection:first-child {
+      margin-bottom: 0.5rem;
+    }
+
+    @media screen and (max-width: 600px) {
+      max-width: 75%;
+    }
   }
 }
 </style>

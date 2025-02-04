@@ -1,23 +1,59 @@
 <template>
   <header class="global-header">
-    <h2 class="site-logo">Samuele Verona</h2>
-    <nav class="navbar" @click="toggleMenu">
-      <button class="menu-btn link"></button>
-      <ul class="site__link-list hidden">
-        <li class="site__page">
-          <a class="link">Home</a>
+    <img
+      :src="require('/src/assets/img/logo-icon.png')"
+      alt=""
+      width="50"
+      class="site-logo"
+    />
+    <nav class="navbar" @click="handleNavigation">
+      <ul class="pages-list">
+        <li class="pages-list__item">
+          <img
+            :src="require('/src/assets/img/home.png')"
+            alt="home icon"
+            class="pages-list__img"
+            data-btn-id="home"
+          />
+          <button class="pages-list__btn" data-btn-id="home">Home</button>
         </li>
-        <li class="site__page">
-          <a class="link">Bio</a>
+        <li class="pages-list__item">
+          <img
+            :src="require('/src/assets/img/bio.png')"
+            alt="avatar icon"
+            class="pages-list__img"
+            data-btn-id="bio"
+          />
+          <button class="pages-list__btn" data-btn-id="bio">Bio</button>
         </li>
-        <li class="site__page">
-          <a class="link">Journey</a>
+        <li class="pages-list__item">
+          <img
+            :src="require('/src/assets/img/path.png')"
+            alt="path icon"
+            class="pages-list__img"
+            data-btn-id="time"
+          />
+          <button class="pages-list__btn" data-btn-id="time">Path</button>
         </li>
-        <li class="site__page">
-          <a class="link">Projects</a>
+        <li class="pages-list__item">
+          <img
+            :src="require('/src/assets/img/projects.png')"
+            alt="projects icon"
+            class="pages-list__img"
+            data-btn-id="projects"
+          />
+          <button class="pages-list__btn" data-btn-id="projects">
+            Projects
+          </button>
         </li>
-        <li class="site__page">
-          <a class="link">Contacts</a>
+        <li class="pages-list__item">
+          <img
+            :src="require('/src/assets/img/links.png')"
+            alt="links icon"
+            class="pages-list__img"
+            data-btn-id="links"
+          />
+          <button class="pages-list__btn" data-btn-id="links">Links</button>
         </li>
       </ul>
     </nav>
@@ -25,93 +61,118 @@
 </template>
 
 <script setup>
-function toggleMenu(e) {
+function handleNavigation(e) {
   const target = e.target;
-  if (!target.classList.contains("menu-btn")) return;
-  const menu = target.nextElementSibling;
-  console.log(menu);
-  menu.classList.toggle("hidden");
+
+  if (!target.dataset.btnId) return;
+
+  const sectionTarget = target.dataset.btnId;
+  document
+    .querySelector(`#${sectionTarget}`)
+    .scrollIntoView({ behavior: "smooth", block: "start" });
 }
 </script>
 
 <style lang="scss" scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .global-header {
-  position: relative;
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem;
-  height: 10dvh;
+  height: 10vh;
   overflow: visible;
+  backdrop-filter: blur(10px);
+  box-shadow: 0rem 0rem 0.8rem aqua;
+  pointer-events: auto;
+  z-index: 100;
 
   .site-logo {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    font-size: 4rem;
-    padding: 0;
-    padding-left: 2rem;
-  }
-  .menu-btn {
-    flex: 1;
-    display: none;
-    height: 100%;
-    aspect-ratio: 1;
-    margin-right: 1rem;
-    background: url(/src/assets/img/menu.png);
-    background-size: 70%;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: none;
-    filter: invert(100%);
-    cursor: pointer;
-
-    @media screen and (max-width: 748px) {
-      display: block;
-      flex-direction: column;
-      flex: 0.5;
-      align-items: flex-end;
-    }
+    margin-left: 1rem;
   }
 
-  .site__link-list {
-    position: relative;
-    flex: 1;
+  .navbar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
     height: 100%;
+    margin-right: 3rem;
 
-    .link {
-      margin: 0rem 0.5rem;
-      text-decoration: none;
-      cursor: pointer;
-      font-size: 2.2rem;
-      font-weight: 600;
+    .pages-list {
+      position: relative;
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      height: 100%;
 
-      @keyframes fade-in {
-        0% {
-          opacity: 0;
+      .pages-list__img {
+        display: none;
+        width: 3.5rem;
+        aspect-ratio: 1;
+        margin: 0 1rem;
+        padding: 0;
+        cursor: pointer;
+        transition: var(--transition-default);
+
+        &:hover {
+          scale: 1.2;
         }
-        100% {
-          opacity: 1;
+      }
+
+      .pages-list__btn {
+        display: block;
+        margin: 0rem 1.5rem;
+        text-decoration: none;
+        font-size: 2.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        color: inherit;
+        font-family: inherit;
+        transition: var(--transition-default);
+        &:hover {
+          color: var(--theme-primary);
+        }
+
+        @keyframes fade-in {
+          0% {
+            transform: translateY(-20px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+
+            opacity: 1;
+          }
         }
       }
     }
 
     @media screen and (max-width: 748px) {
-      position: absolute;
-      right: 1rem;
-      flex-direction: column;
-      flex: 0.5;
-      align-items: flex-end;
+      align-items: center;
+      justify-content: flex-end;
+      width: max-content;
 
-      &.hidden {
+      .pages-list.hidden {
         display: none;
       }
-      .link {
-        margin: 2rem 1rem;
-        animation: fade-in 0.3s ease forwards;
+      .pages-list {
+        .pages-list__img {
+          display: block;
+          width: 3rem;
+          aspect-ratio: 1;
+        }
+        .pages-list__btn {
+          display: none;
+        }
       }
     }
   }

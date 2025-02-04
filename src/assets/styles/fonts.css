@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/src/assets/fonts/Helevetica-Neue-Optimized/helveticaneuelight-webfont.woff")
+      format("woff"),
+    url("/src/assets/fonts/Helevetica-Neue-Optimized/helveticaneuelight-webfont.woff2")
+      format("woff2");
+  font-display: swap;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
