@@ -28,7 +28,7 @@
           class="project__link"
         >
           <img
-            :src="require('/src/assets/img/beard.png')"
+            :src="require('/src/assets/img/beard.webp')"
             alt="beard icon"
             class="project__img"
           />
