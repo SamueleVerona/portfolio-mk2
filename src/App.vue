@@ -5,7 +5,7 @@
   <bio-page id="bio" class="page"></bio-page>
   <timeline-page id="time"></timeline-page>
   <projects-page id="projects"></projects-page>
-  <contacts-page id="links"></contacts-page>
+  <links-page id="links"></links-page>
 </template>
 
 <script setup>
@@ -15,14 +15,14 @@ import HomePage from "./components/pages/HomePage.vue";
 import BioPage from "./components/pages/BioPage.vue";
 import TimelinePage from "./components/pages/TimelinePage.vue";
 import ProjectsPage from "./components/pages/ProjectsPage.vue";
-import ContactsPage from "./components/pages/ContactsPage.vue";
+import LinksPage from "./components/pages/LinksPage.vue";
 
 defineComponent("home-page");
 defineComponent("the-header");
 defineComponent("bio-page");
 defineComponent("timeline-page");
 defineComponent("projects-page");
-defineComponent("contacts-page");
+defineComponent("links-page");
 </script>
 
 <style lang="scss">
